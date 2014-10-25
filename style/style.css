@@ -10,7 +10,7 @@ h1{text-align:center;}
 .phantom_image{visibility:hidden; position:absolute; top:0; left:0;}
 .gimage{display:inline-block; visibility:hidden;}
 .gimage.loaded{visibility:visible;}
-gallery{display:block; width:100%; margin-right:0px;}
+gallery{display:block; width:calc(100% - 16px); margin-right:0px; margin-left:16px;}
 
 #progressbar{height:4px; background-image:url(../images/loading.gif); -webkit-transition:width 0.5s;}
 #progressbar_wrapper{background-color:#444; position:fixed; top:0; left:0; width:100%; -webkit-transition: opacity 1s; opacity:1;}
