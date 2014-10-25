@@ -11,10 +11,10 @@ angular.module('components',[])
             $scope.oninit(element)
             
             var img=new Image()
-            img.height=0
+            img.className="phantom_image"
             element.setheight=function(val){
-                console.log("setheight "+val)
                 img.height=val
+                img.className=""
                 }
             
             angular.element(img).on("load",function(){
@@ -37,18 +37,19 @@ angular.module('components',[])
     return {
         restrict:'E',
         transclude:false,
-        scope:{images:"=",isloading:"="},
+        scope:{images:"=",isloading:"=",onloadchange:"="},
         link:function($scope,element,attrs){
             $scope.element=element
             },
         controller:function($scope){
+            $scope.loadcount=0
             $scope.image_elements=[]
             $scope.oninit=function(element){
                 $scope.image_elements.push(element)
                 }
             $scope.reflow=function(){
                 var rowheight=Math.floor(window.innerHeight/3)
-                var rowwidth=$scope.element[0].clientWidth-32
+                var rowwidth=$scope.element[0].clientWidth//-32
                 
                 for(var i=0;i<$scope.image_elements.length;i++)
                     {
@@ -79,16 +80,33 @@ angular.module('components',[])
                             currentrowwidth+=currentrow[j][0].clientWidth
                             }
                         
-                        
-                        console.log(currentrowwidth)
-                        
                         rows+=1
                         currentrow=[]
                         currentrowwidth=0
                         }
                     }
                 }
+            $scope.$watchCollection('images',function(oldv,newv){
+                $scope.loadcount+=Math.abs(oldv.length-newv.length)
+                console.log("loading "+$scope.loadcount+" images")
+                })
+            
             $scope.onload=function(){
+                var num=0
+                for(var i=0;i<$scope.image_elements.length;i++)
+                    {
+                    if($scope.image_elements[i].hasClass("loaded")==false)
+                        num+=1
+                    }
+                
+                var perc=100-(num*100/$scope.loadcount)
+                if(perc==100)
+                    {
+                    $scope.loadcount=0
+                    console.log("fully loaded")
+                    }
+                $scope.onloadchange(perc)
+                
                 for(var i=0;i<$scope.image_elements.length;i++)
                     {
                     if($scope.image_elements[i].hasClass("loaded")==false)
@@ -96,6 +114,7 @@ angular.module('components',[])
                     }
                 
                 $scope.reflow()
+                //setTimeout(function(){$scope.$apply($scope.reflow)},5000)
                 
                 console.log("done loading.")
                 $scope.isloading=false

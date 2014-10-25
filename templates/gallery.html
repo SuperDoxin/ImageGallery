@@ -1,5 +1,8 @@
+<div id="progressbar_wrapper" ng-class="{noshow:loadpercentage==100||loadpercentage==0}">
+    <div id="progressbar" style="width:{{loadpercentage}}%;"></div>
+</div>
 <h1>{{title}}</h1>
 <div infinite-scroll="loadimages()" infinite-scroll-distance="3"><!-- infinite-scroll-disabled="isloading" -->
-    <gallery images="images" isloading=isloading>
+    <gallery images="images" isloading=isloading onloadchange=onload>
     </gallery>
 </div>

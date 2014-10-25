@@ -48,6 +48,15 @@ angular.module('gallery',['ngRoute','ngResource','tumblrService','components','i
     $scope.images=[]
     $scope.postoffset=0
     $scope.isloading=false
+    //$scope.loadpercentage=0
+    $scope.onload=function(perc)
+        {
+        $scope.$apply(function(){
+            $scope.loadpercentage=perc
+            if($scope.loadpercentage==100)
+                setTimeout(function(){$scope.$apply(function(){$scope.loadpercentage=0})},1500)
+            })
+        }
     
     var bloginfo=TumblrInfo.get({basehostname:$routeParams["url"]})
     bloginfo.$promise.then(function(data){

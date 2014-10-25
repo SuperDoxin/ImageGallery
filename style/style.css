@@ -11,3 +11,8 @@ h1{text-align:center;}
 .gimage{display:inline-block; visibility:hidden;}
 .gimage.loaded{visibility:visible;}
 gallery{display:block; width:100%; margin-right:0px;}
+
+#progressbar{height:4px; background-image:url(../images/loading.gif); -webkit-transition:width 0.5s;}
+#progressbar_wrapper{background-color:#444; position:fixed; top:0; left:0; width:100%; -webkit-transition: opacity 1s; opacity:1;}
+
+#progressbar_wrapper.noshow{opacity:0;}
