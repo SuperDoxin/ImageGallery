@@ -1,0 +1,13 @@
+body{background:#222; color:white; font-family:'Open Sans', sans-serif;}
+
+.dialog{background:#333; width:50%; position:fixed; top:128px; left:calc(25% - 32px); padding:32px; border-radius:16px; }
+
+#sourceselectform input{width:calc(100% + 64px); font-size:32px; margin-left:-32px; margin-right:-32px;}
+
+#sourceselectform{text-align:center;}
+h1{text-align:center;}
+
+.phantom_image{visibility:hidden; position:absolute; top:0; left:0;}
+.gimage{display:inline-block; visibility:hidden;}
+.gimage.loaded{visibility:visible;}
+gallery{display:block; width:100%; margin-right:0px;}
