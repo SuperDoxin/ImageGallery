@@ -49,7 +49,7 @@ angular.module('components',[])
                 }
             $scope.reflow=function(){
                 var rowheight=Math.floor(window.innerHeight/3)
-                var rowwidth=$scope.element[0].clientWidth//-32
+                var rowwidth=$scope.element[0].clientWidth-1//-32
                 
                 for(var i=0;i<$scope.image_elements.length;i++)
                     {
