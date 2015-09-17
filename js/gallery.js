@@ -74,8 +74,11 @@ angular.module('gallery',['ngRoute','ngResource','tumblrService','components','i
             var promises=[]
             for(var i=0;i<lst.length;i++)
                 {
-                var url=lst[i]["photos"][0]["original_size"]["url"]
-                $scope.images.push(url)
+                for(var j=0;j<lst[i]["photos"].length;j++)
+                    {
+                    var url=lst[i]["photos"][j]["original_size"]["url"]
+                    $scope.images.push(url)
+                    }
                 } 
             $scope.postoffset+=lst.length
             })
