@@ -4,7 +4,7 @@ angular.module('components',[])
     return {
         restrict:'E',
         transclude:false,
-        scope:{src:"=",onload:"=",oninit:"=",height:"@"},
+        scope:{src:"=",onload:"=",oninit:"=",height:"@",onpopup:"&onpopup"},
         controller:function($scope){
             },
         link:function($scope,element,attrs){
@@ -12,6 +12,14 @@ angular.module('components',[])
             
             var img=new Image()
             img.className="phantom_image"
+            img.style.cursor="pointer"
+            
+            angular.element(img).on("click",function(){
+                $scope.$apply(function(){
+                    $scope.onpopup({"img":img.src})
+                    })
+                })
+            
             element.setheight=function(val){
                 img.height=val
                 img.className=""
@@ -119,8 +127,18 @@ angular.module('components',[])
                 console.log("done loading.")
                 $scope.isloading=false
                 }
+            $scope.popupsrc=""
+            $scope.unpopup=function(img)
+                {
+                $scope.popupsrc=""
+                }
+            $scope.popup=function(img)
+                {
+                console.log("popup:",img)
+                $scope.popupsrc=img
+                }
             },
-        template:'<gimage src="src" onload="onload" oninit="oninit" ng-repeat="src in images"></gimage>',
+        template:'<div class="popup" ng-class="{\'hidden\':popupsrc==\'\'}"><img class="closebtn" src="images/close.png" ng-click="unpopup()"><img ng-src="{{popupsrc}}"></div><gimage src="src" onpopup="popup(img)" onload="onload" oninit="oninit" ng-repeat="src in images"></gimage>',
         replace:false
         }
     })

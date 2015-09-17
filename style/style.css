@@ -10,6 +10,12 @@ h1{text-align:center;}
 .phantom_image{visibility:hidden; position:absolute; top:0; left:0;}
 .gimage{display:inline-block; visibility:hidden;}
 .gimage.loaded{visibility:visible;}
+
+gallery .popup{position:fixed; left:0; top:0; width:100%; height:100%; text-align:center; background:rgba(0,0,0,0.7);}
+gallery .popup img{max-width:100%; max-height:100%;}
+gallery .popup.hidden{display:none;}
+gallery .popup .closebtn{position:fixed; right:8; top:8; cursor:pointer;}
+
 gallery{display:block; width:calc(100% - 16px); margin-right:0px; margin-left:16px;}
 
 #progressbar{height:4px; background-image:url(../images/loading.gif); -webkit-transition:width 0.5s;}
