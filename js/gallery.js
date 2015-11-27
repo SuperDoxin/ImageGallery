@@ -77,7 +77,8 @@ angular.module('gallery',['ngRoute','ngResource','tumblrService','components','i
                 for(var j=0;j<lst[i]["photos"].length;j++)
                     {
                     var url=lst[i]["photos"][j]["original_size"]["url"]
-                    $scope.images.push(url)
+                    if($scope.images.indexOf(url)==-1)
+                        $scope.images.push(url)
                     }
                 } 
             $scope.postoffset+=lst.length
